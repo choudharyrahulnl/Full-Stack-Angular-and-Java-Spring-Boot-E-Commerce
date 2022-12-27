@@ -45,4 +45,16 @@ public class ProductApi {
         productService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/search/find-by-category")
+    public ResponseEntity<List<ProductDto>> findByCategory(@RequestParam("id") List<Long> id) {
+        return new ResponseEntity<>(productService.findByCategory(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/search/find-by-name")
+    public ResponseEntity<List<ProductDto>> findByName(@RequestParam("name") String name,
+                                                       @RequestParam("page") int page,
+                                                       @RequestParam("size") int size) {
+        return new ResponseEntity<>(productService.findByName(name, page, size), HttpStatus.OK);
+    }
 }

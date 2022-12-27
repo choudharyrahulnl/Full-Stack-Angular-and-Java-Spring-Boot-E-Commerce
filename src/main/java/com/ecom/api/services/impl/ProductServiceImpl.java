@@ -3,12 +3,15 @@ package com.ecom.api.services.impl;
 import com.ecom.api.dtos.ProductDto;
 import com.ecom.api.entities.Product;
 import com.ecom.api.entities.ProductCategory;
+import com.ecom.api.exceptions.ProductNotFoundException;
 import com.ecom.api.mappers.ProductMapper;
 import com.ecom.api.repositories.ProductCategoryRepository;
 import com.ecom.api.repositories.ProductRepository;
 import com.ecom.api.services.ProductService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,14 +45,21 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findById(Long id) {
-        Product productEntity = productRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
-        return productMapper.toDto(productEntity);
+        try {
+            Product productEntity = productRepository.findById(id)
+                    .orElseThrow(EntityNotFoundException::new);
+            return productMapper.toDto(productEntity);
+        } catch (EntityNotFoundException ex) {
+            throw new ProductNotFoundException("Product with ID " + id + " not found");
+        }
     }
 
     @Override
     public List<ProductDto> findAll() {
         List<Product> productList = productRepository.findAll();
+        if (productList.isEmpty()) {
+            throw new ProductNotFoundException("Products not found");
+        }
         return productList.stream()
                 .map(productMapper::toDto)
                 .collect(Collectors.toList());
@@ -72,10 +82,36 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteById(Long id) {
-        Product productEntity = productRepository.findById(id)
-                .orElseThrow(EntityNotFoundException::new);
-        if(productEntity.getId() != null) {
-            productRepository.deleteById(id);
+        try {
+            Product productEntity = productRepository.findById(id)
+                    .orElseThrow(EntityNotFoundException::new);
+            if (productEntity.getId() != null) {
+                productRepository.deleteById(id);
+            }
+        } catch (EntityNotFoundException ex) {
+            throw new ProductNotFoundException("Product with ID " + id + " not found");
         }
+    }
+
+    @Override
+    public List<ProductDto> findByCategory(List<Long> id) {
+        List<Product> productList = productRepository.findProductByCategory(id);
+        if(productList.isEmpty()){
+            throw new ProductNotFoundException("Product with Categories " + id +" not found");
+        }
+        return productList.stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDto> findByName(String name, int page, int size) {
+        Page<Product> productList = productRepository.findProductByNameContaining(name, PageRequest.of(page, size) );
+        if(productList.isEmpty()) {
+            throw new ProductNotFoundException("Product with Name " + name +" not found");
+        }
+        return productList.stream()
+                .map(productMapper::toDto)
+                .collect(Collectors.toList());
     }
 }
