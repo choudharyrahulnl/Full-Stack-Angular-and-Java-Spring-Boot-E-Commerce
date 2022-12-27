@@ -1,11 +1,12 @@
 package com.ecom.api.apis;
 
 import com.ecom.api.dtos.CountryDto;
-import com.ecom.api.dtos.ProductCategoryDto;
+import com.ecom.api.dtos.CountryListDto;
 import com.ecom.api.services.CountryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,12 @@ public class CountryApi {
     }
 
     @GetMapping
-    public ResponseEntity<List<CountryDto>> findAll() {
+    public ResponseEntity<List<CountryListDto>> findAll() {
         return new ResponseEntity<>(countryService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CountryDto> findById(@PathVariable Integer id) {
+        return new ResponseEntity<>(countryService.findById(id), HttpStatus.OK);
     }
 }

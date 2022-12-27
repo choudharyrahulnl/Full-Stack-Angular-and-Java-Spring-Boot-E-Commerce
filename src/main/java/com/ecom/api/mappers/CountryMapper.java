@@ -1,6 +1,7 @@
 package com.ecom.api.mappers;
 
 import com.ecom.api.dtos.CountryDto;
+import com.ecom.api.dtos.CountryListDto;
 import com.ecom.api.entities.Country;
 import org.mapstruct.*;
 
@@ -13,8 +14,8 @@ public interface CountryMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Country partialUpdate(CountryDto countryDto, @MappingTarget Country country);
 
-//    @AfterMapping
-//    default void linkStates(@MappingTarget Country country) {
-//        country.getStates().forEach(state -> state.setCountry(country));
-//    }
+    @AfterMapping
+    default void linkStates(@MappingTarget Country country) {
+        country.getStates().forEach(state -> state.setCountry(country));
+    }
 }
