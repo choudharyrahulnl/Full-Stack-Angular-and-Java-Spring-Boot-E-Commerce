@@ -2,7 +2,6 @@ package com.ecom.api.services.impl;
 
 import com.ecom.api.dtos.ProductDto;
 import com.ecom.api.dtos.ProductListDto;
-import com.ecom.api.entities.PageDetail;
 import com.ecom.api.entities.Product;
 import com.ecom.api.entities.ProductCategory;
 import com.ecom.api.exceptions.ProductNotFoundException;
