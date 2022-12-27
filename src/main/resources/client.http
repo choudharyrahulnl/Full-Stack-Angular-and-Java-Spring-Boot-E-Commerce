@@ -1,72 +1,51 @@
 ###
-POST http://localhost:8080/api/v1/students
+POST http://localhost:8080/api/v1/products
 Content-Type: application/json
 
 {
-  "firstName": "Rahul",
-  "lastName": "Choudhary",
-  "email": "no-reply@gmail.com"
+  "sku": "BOOK-TECH-1005",
+  "name": "Hibernate Best Practice",
+  "description": "Learn Hibernate",
+  "unitPrice": "19.99",
+  "imageUrl": "assets/images/products/placeholder.png",
+  "active": true,
+  "unitsInStock": 100,
+  "category": {
+    "id": 1
+  }
 }
 
 
 ###
-POST http://localhost:8080/api/v1/students
+PUT http://localhost:8080/api/v1/products
 Content-Type: application/json
 
 {
-  "firstName": "Shalu",
-  "lastName": "Baliyan",
-  "email": "no-reply@gmail.com"
+  "id": 6,
+  "sku": "BOOK-TECH-1005",
+  "name": "Hibernate Best Practices",
+  "description": "Learn Hibernate",
+  "unitPrice": "19.99",
+  "imageUrl": "assets/images/products/placeholder.png",
+  "active": true,
+  "unitsInStock": 100,
+  "category": {
+    "id": 1,
+    "categoryName": "BOOKS"
+  }
 }
 
 
 ###
-GET http://localhost:8080/api/v1/students
+GET http://localhost:8080/api/v1/products
 Content-Type: application/json
 
 
 ###
-PUT http://localhost:8080/api/v1/students
-Content-Type: application/json
-
-{
-  "id": 2,
-  "lastName": "Choudhary"
-}
-
-
-###
-GET http://localhost:8080/api/v1/students
+GET http://localhost:8080/api/v1/products/1
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/students
-
-
-###
-GET http://localhost:8080/api/v1/students/filter?lastName=Choudhary
+DELETE http://localhost:8080/api/v1/products/6
 Content-Type: application/json
-
-
-###
-GET http://localhost:8080/api/v1/students/1
-Content-Type: application/json
-
-
-###
-DELETE http://localhost:8080/api/v1/students/2
-Content-Type: application/json
-
-
-###
-GET http://localhost:8080/api/v1/students/by-email?email=gmail.com
-Content-Type: application/json
-
-
-###
-GET http://localhost:8080/api/v1/students
-
-
-###
-GET http://localhost:8080/api/v1/students/1
