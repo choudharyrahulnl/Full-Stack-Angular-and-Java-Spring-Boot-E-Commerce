@@ -31,7 +31,7 @@ public class ProductApi {
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping(params = { "page", "size" })
     public ResponseEntity<List<ProductListDto>> findAll(@RequestParam("page") int page,
                                                         @RequestParam("size") int size) {
         return new ResponseEntity<>(productService.findAll(page, size), HttpStatus.OK);
