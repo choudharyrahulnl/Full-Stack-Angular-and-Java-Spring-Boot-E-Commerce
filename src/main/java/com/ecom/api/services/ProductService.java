@@ -1,6 +1,7 @@
 package com.ecom.api.services;
 
 import com.ecom.api.dtos.ProductDto;
+import com.ecom.api.dtos.ProductListDto;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface ProductService {
 
     ProductDto findById(Long id);
 
-    List<ProductDto> findAll();
+    List<ProductListDto> findAll(int page, int size);
 
     ProductDto update(ProductDto productDto);
 

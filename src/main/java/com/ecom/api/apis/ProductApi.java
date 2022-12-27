@@ -1,6 +1,7 @@
 package com.ecom.api.apis;
 
 import com.ecom.api.dtos.ProductDto;
+import com.ecom.api.dtos.ProductListDto;
 import com.ecom.api.services.ProductService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -31,8 +32,9 @@ public class ProductApi {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> findAll() {
-        return new ResponseEntity<>(productService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ProductListDto>> findAll(@RequestParam("page") int page,
+                                                        @RequestParam("size") int size) {
+        return new ResponseEntity<>(productService.findAll(page, size), HttpStatus.OK);
     }
 
     @PutMapping()

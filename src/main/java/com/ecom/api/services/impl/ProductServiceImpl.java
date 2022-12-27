@@ -1,9 +1,12 @@
 package com.ecom.api.services.impl;
 
 import com.ecom.api.dtos.ProductDto;
+import com.ecom.api.dtos.ProductListDto;
+import com.ecom.api.entities.PageDetail;
 import com.ecom.api.entities.Product;
 import com.ecom.api.entities.ProductCategory;
 import com.ecom.api.exceptions.ProductNotFoundException;
+import com.ecom.api.mappers.ProductListMapper;
 import com.ecom.api.mappers.ProductMapper;
 import com.ecom.api.repositories.ProductCategoryRepository;
 import com.ecom.api.repositories.ProductRepository;
@@ -26,13 +29,16 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final ProductListMapper productListMapper;
     private final ProductCategoryRepository productCategoryRepository;
 
     public ProductServiceImpl(ProductRepository productRepository,
                               ProductMapper productMapper,
+                              ProductListMapper productListMapper,
                               ProductCategoryRepository productCategoryRepository) {
         this.productRepository = productRepository;
         this.productMapper = productMapper;
+        this.productListMapper = productListMapper;
         this.productCategoryRepository = productCategoryRepository;
     }
 
@@ -54,14 +60,15 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    // page default is 0 & size default is 20
     @Override
-    public List<ProductDto> findAll() {
-        List<Product> productList = productRepository.findAll();
+    public List<ProductListDto> findAll(int page, int size) {
+        Page<Product> productList = productRepository.findAll(PageRequest.of(page,size));
         if (productList.isEmpty()) {
             throw new ProductNotFoundException("Products not found");
         }
         return productList.stream()
-                .map(productMapper::toDto)
+                .map(productListMapper::toDto)
                 .collect(Collectors.toList());
     }
 
