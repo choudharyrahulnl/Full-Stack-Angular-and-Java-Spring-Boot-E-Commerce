@@ -1,5 +1,5 @@
 ###
-POST http://localhost:8080/api/v1/products
+POST https://localhost:8443/api/v1/products
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:8080/api/v1/products
+PUT https://localhost:8443/api/v1/products
 Content-Type: application/json
 
 {
@@ -37,47 +37,47 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/products?page=0&size=10
+GET https://localhost:8443/api/v1/products?page=0&size=10
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/products/1
+GET https://localhost:8443/api/v1/products/1
 Content-Type: application/json
 
 
 ###
-DELETE http://localhost:8080/api/v1/products/6
+DELETE https://localhost:8443/api/v1/products/6
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/products/search/find-by-category?id=8
+GET https://localhost:8443/api/v1/products/search/find-by-category?id=8
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/product-category
+GET https://localhost:8443/api/v1/product-category
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/products/search/find-by-name?name=the&page=0&size=2
+GET https://localhost:8443/api/v1/products/search/find-by-name?name=the&page=0&size=2
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/countries
+GET https://localhost:8443/api/v1/countries
 Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/countries/1
+GET https://localhost:8443/api/v1/countries/1
 Content-Type: application/json
 
 
 ###
-POST http://localhost:8080/api/v1/checkout
+POST https://localhost:8443/api/v1/checkout
 Content-Type: application/json
 
 {
@@ -126,9 +126,9 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:8080/api/v1/orders/search?email=no-reply@test.com&page=0&size=20
+GET https://localhost:8443/api/v1/orders/search?email=no-reply@test.com&page=0&size=20
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/v1/orders/1
+GET https://localhost:8443/api/v1/orders/1
 Content-Type: application/json
