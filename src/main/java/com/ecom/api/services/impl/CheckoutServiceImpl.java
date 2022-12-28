@@ -77,6 +77,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         customer.add(order);
 
         // save to db
+        // in db object will be saved in sequence, depends on foreign key
+        // ex order has foreign key for customer, billing & shipping address, so these will be saved first
+        // order_item has foreign key for order, order will be saved then and finally order_item
+        // in objects we need to just create/set the object graph of customer, address, order, order item
+        // hibernate will read relationship mapping and insert as per above db sequence
+        // that means we can also save order instead of customer just by adding cascade = CascadeType.ALL
+        // on Order Class - Customer Object that mean if you save order then save customer as well
         customerRepository.save(customer);
 
         // return order tracking number
