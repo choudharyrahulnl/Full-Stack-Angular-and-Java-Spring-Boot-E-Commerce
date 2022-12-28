@@ -19,7 +19,7 @@ public class OrderApi {
         this.orderService = orderService;
     }
 
-    @GetMapping
+    @GetMapping("/search")
     public ResponseEntity<List<OrderListDto>> findOrdersByEmail(@RequestParam("email") String email,
                                                                @RequestParam("page") int page,
                                                                @RequestParam("size") int size) {
