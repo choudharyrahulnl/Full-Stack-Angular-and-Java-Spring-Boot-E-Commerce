@@ -66,6 +66,14 @@ public class CheckoutServiceImpl implements CheckoutService {
 
         // populate customer with order
         Customer customer = customerMapper.toEntity(purchaseDto.getCustomer());
+
+        // check if this is an existing customer
+        Customer byEmail = customerRepository.findByEmail(customer.getEmail());
+        if (byEmail != null) {
+            customer = byEmail;
+        }
+
+        // add order to customer
         customer.add(order);
 
         // save to db
