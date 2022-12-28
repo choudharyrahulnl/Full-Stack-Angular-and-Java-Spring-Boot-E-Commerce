@@ -2,11 +2,8 @@ package com.ecom.api.services.impl;
 
 import com.ecom.api.dtos.CountryDto;
 import com.ecom.api.dtos.CountryListDto;
-import com.ecom.api.dtos.ProductDto;
 import com.ecom.api.entities.Country;
-import com.ecom.api.entities.Product;
 import com.ecom.api.exceptions.CountryNotFoundException;
-import com.ecom.api.exceptions.ProductNotFoundException;
 import com.ecom.api.mappers.CountryListMapper;
 import com.ecom.api.mappers.CountryMapper;
 import com.ecom.api.repositories.CountryRepository;

@@ -1,0 +1,2 @@
+TRUNCATE country;
+TRUNCATE state;

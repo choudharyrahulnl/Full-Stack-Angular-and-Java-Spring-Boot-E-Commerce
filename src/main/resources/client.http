@@ -74,3 +74,52 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/v1/countries/1
 Content-Type: application/json
+
+
+###
+POST http://localhost:8080/api/v1/checkout
+Content-Type: application/json
+
+{
+  "customer":{
+    "firstName":"Rahul",
+    "lastName":"Choudhary",
+    "email":"no-reply@test.com"
+  },
+  "shippingAddress":{
+    "street":"Luxmanweg",
+    "city":"Amsterdam",
+    "state":"Amsterdam",
+    "country":"Netherlands",
+    "zipCode":"1672QA"
+  },
+  "billingAddress":{
+    "street":"Luxmanweg",
+    "city":"Amsterdam",
+    "state":"Amsterdam",
+    "country":"Netherlands",
+    "zipCode":"1672QA"
+  },
+  "order":{
+    "totalPrice":36.98,
+    "totalQuantity":2
+  },
+  "orderItems":[
+    {
+      "imageUrl":"assets/images/products/coffeemugs/coffeemug-luv2code-1000.png",
+      "quantity":1,
+      "unitPrice":18.99,
+      "product":{
+        "id": 1
+      }
+    },
+    {
+      "imageUrl":"assets/images/products/mousepads/mousepad-luv2code-1000.png",
+      "quantity":1,
+      "unitPrice":17.99,
+      "product":{
+        "id": 2
+      }
+    }
+  ]
+}
