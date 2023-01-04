@@ -43,7 +43,7 @@ public class CheckoutServiceImpl implements CheckoutService {
     public PurchaseResponseDto placeOrder(PurchaseRequestDto purchaseDto) {
 
         // retrieve the order info from dto
-        Order order = orderMapper.toEntity(purchaseDto.getOrder());
+        Order order = orderMapper.toEntity(purchaseDto.getOrderDto());
 
         // generate tracking number
         String orderTrackingNumber = generateOrderTrackingNumber();
@@ -59,13 +59,13 @@ public class CheckoutServiceImpl implements CheckoutService {
         order.setStatus("CREATED");
 
         // populate order with billing address & shipping address
-        Address billingAddress = addressMapper.toEntity(purchaseDto.getBillingAddress());
-        Address shippingAddress = addressMapper.toEntity(purchaseDto.getShippingAddress());
+        Address billingAddress = addressMapper.toEntity(purchaseDto.getBillingAddressDto());
+        Address shippingAddress = addressMapper.toEntity(purchaseDto.getShippingAddressDto());
         order.setBillingAddress(billingAddress);
         order.setShippingAddress(shippingAddress);
 
         // populate customer with order
-        Customer customer = customerMapper.toEntity(purchaseDto.getCustomer());
+        Customer customer = customerMapper.toEntity(purchaseDto.getCustomerDto());
 
         // check if this is an existing customer
         Customer byEmail = customerRepository.findByEmail(customer.getEmail());
